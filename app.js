@@ -43,6 +43,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// Comments testing
+// Adding custom code
+app.get('/', function(req, res){
+  res.send('Hello World!')
+});
+
+app.listen(3000, function() {
+  console.log('App listening on the 3000 port!')
+});
+// End of added code
 
 module.exports = app;
