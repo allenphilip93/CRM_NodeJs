@@ -15,10 +15,11 @@ requirejs([
   'cookie-parser',
   'body-parser',
   './routes/index',
-  './routes/users'
+  './routes/login',
+  './com/crm/crm-constants'
   ],
 
-  function (express, path, favicon, logger, cookieParser, bodyParser, index, users) {
+  function (express, path, favicon, logger, cookieParser, bodyParser, index, login, Constants) {
 
     var app = express();
 
@@ -44,12 +45,12 @@ requirejs([
 //    app.use(express.static('public'));
 
    // ADDING ROUTES
-   app.use('/', index);
-   app.use('/users', users);
+   app.use(Constants.app_version_path, index);
+   app.use(Constants.app_version_path + '/login', login);
 
    // REST API definitions - GET
    app.get('/', function(req, res){
-     res.send('Hello World!')
+     res.redirect(Constants.app_version_path);
    });
 
    // ERROR HANDLING
@@ -61,15 +62,15 @@ requirejs([
    });
 
    // error handler
-   app.use(function(err, req, res, next) {
-     // set locals, only providing error in development
-     res.locals.message = err.message;
-     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-     // render the error page
-     res.status(err.status || 500);
-     res.render('error');
-   });
+//   app.use(function(err, req, res, next) {
+//     // set locals, only providing error in development
+//     res.locals.message = err.message;
+//     res.locals.error = req.app.get('env') === 'development' ? err : {};
+//
+//     // render the error page
+//     res.status(err.status || 500);
+//     res.send('ERROR: ' + err.message);
+//   });
 
    module.exports = app;
 });
