@@ -1,9 +1,15 @@
-var express = require('express');
-var router = express.Router();
+define([
+  'express',
+  'module'
+  ],
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index.html', { title: 'Hello World' });
+  function(express, module) {
+    router = express.Router();
+
+    /* GET home page. */
+    router.get('/', function(req, res, next) {
+      res.render('index.html', { title: 'Hello World!'});
+    });
+
+    module.exports = router;
 });
-
-module.exports = router;
